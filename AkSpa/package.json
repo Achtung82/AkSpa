@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aspnet-prerendering": "^3.0.1"
+    "aspnet-prerendering": "^3.0.1",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "add": "^2.0.6",

@@ -1,26 +1,33 @@
 ﻿<template>
 <header>
-    <div class="container" v-on:click="testMethod">
-        {{text}}
+    <div class="container">
+        Meny
     </div>
     <nav>
-        <a class="menu-link" href="">hej</a>
-        <a class="menu-link" href="">hej</a>
-        <a class="menu-link" href="">hej</a>
+        <a v-for="menu in menus"
+           class="menu-link" 
+           href="">
+            {{menu}}
+        </a>
     </nav>
 </header>
 </template>
 <script>
+    import 'whatwg-fetch';
     export default {
-        data() {
+        data: function () {
             return {
-                text: 'hajsan',
+                menus: null
             }
         },
-        methods: {
-            testMethod() {
-                console.log("Hej");
-            }
+        created() {
+            var self = this;
+            fetch('/Menu/GetAll')
+                .then(function (response) {
+                    return response.json();
+                }).then(function (json) {
+                    self.menus = json;
+                });
         }
     }
 </script>

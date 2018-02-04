@@ -2,19 +2,18 @@
     <div>
         <Header />
         <div class="body-content">
-            <h1>Välkommen!</h1>
-            <h2>Subtext</h2>
-            <h3>Subtext</h3>
-            <h4>Subtext</h4>
+            <Page />
         </div>
     </div>
 </template>
 <script>
     import Header from './Components/Header.vue'
+    import Page from './Components/Page.vue'
 
     export default {
         components: {
-            Header
+            Header,
+            Page
         }
     }
 </script>

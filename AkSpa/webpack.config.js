@@ -12,9 +12,6 @@ var env = process.env.NODE_ENV;
 
 // Differ settings based on production flag
 if (env === 'production') {
-    var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-
-    plugins.push(new UglifyJsPlugin({ minimize: true }));
     plugins.push(new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"'
@@ -38,7 +35,7 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /\.(js|vue)$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
                 query: {
@@ -54,7 +51,8 @@ module.exports = {
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.esm.js'
-        }
+        },
+        extensions: ['*', '.js', '.vue']
     },
     plugins
 };

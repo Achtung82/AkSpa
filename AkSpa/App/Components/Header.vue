@@ -6,10 +6,11 @@
         </a>
     </div>
     <nav>
-        <router-link class="menu-link" to="/">Page</router-link>
-        <router-link class="menu-link" to="/omoss">Om oss</router-link>
-        <router-link class="menu-link" to="/safaf">Om er</router-link>
-        <router-link class="menu-link" to="/admin">Admin Page</router-link>
+        <router-link class="menu-link" to="/">Hem</router-link>
+        <router-link class="menu-link" to="/hire">Anlita oss</router-link>
+        <router-link class="menu-link" to="/join">Gå med</router-link>
+        <router-link class="menu-link" to="/om-oss">Om oss</router-link>
+        <router-link class="menu-link" to="/Upcoming">Spelningar</router-link>
     </nav>
 </header>
 </template>
@@ -52,5 +53,8 @@
     nav .menu-link {
         color: $akwhite;
         padding: 0 20px;
+    }
+    nav .menu-link.router-link-exact-active {
+        color: $akmenulinkgrey;
     }
 </style>

@@ -31,18 +31,18 @@ namespace AkSpa
             services.AddRouting();
             services.AddMemoryCache();
             services.AddSession();
-            //services.AddIdentity<AkUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<AkContext>()
-            //    .AddDefaultTokenProviders();
+            services.AddIdentity<AkUser, IdentityRole>()
+                .AddEntityFrameworkStores<AkContext>()
+                .AddDefaultTokenProviders();
 
-            //services.Configure<IdentityOptions>(options =>
-            //{
-            //    options.Password.RequireDigit = false;
-            //    options.Password.RequireLowercase = false;
-            //    options.Password.RequireNonAlphanumeric = false;
-            //    options.Password.RequireUppercase = false;
-            //    options.Password.RequiredLength = 6;
-            //});
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

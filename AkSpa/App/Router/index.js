@@ -10,9 +10,10 @@ const router = new VueRouter({
     mode: "history",
     routes: [
         { path: "/", component: Page },
-        { path: "/admin", component: AdminPage },
-        { path: "/omoss", component: AdminPage },
-        { path: "/safaf", component: Page }
+        { path: "/hire", component: Page },
+        { path: "/join", component: Page },
+        { path: "/om-oss", component: Page },
+        { path: "/Upcoming", component: Page }
     ]
 });
 

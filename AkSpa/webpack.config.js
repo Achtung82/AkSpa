@@ -11,9 +11,8 @@ var exportPath = path.resolve(__dirname, './wwwroot/dist/');
 var plugins = [];
 var extractSASS = new ExtractTextPlugin("style.css");
 
-var env = process.env.NODE_ENV;
 // Differ settings based on production flag
-if (env === 'production') {
+if (process.env.NODE_ENV === 'production') {
     var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
     plugins.push(new UglifyJsPlugin({ minimize: true }));

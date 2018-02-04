@@ -38,7 +38,7 @@ namespace AkSpa.Controllers
         [HttpGet]
         public JsonResult GetAllPages()
         {
-            var pages = _db.Pages.Where(x => !x.LoggedIn).ToList();
+            var pages = _db.Pages.Where(x => !x.LoggedIn).ToDictionary(x=>x.Slug.ToLower());
 
             return Json(pages);
         }

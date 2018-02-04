@@ -1,6 +1,6 @@
 ﻿<template>
-    <div class="page">
-        <h1>Välkommen!</h1>
+    <div class="page" v-if="pageData">
+        <h1>{{pageData.name}}</h1>
         <h2>Subtext</h2>
         <h3>Subtext</h3>
         <h4>Subtext</h4>
@@ -8,6 +8,14 @@
 </template>
 <script>
     export default {
+        computed: {
+            pageData: function () {
+                if (!this.$store.getters.pages) {
+                    return false;
+                }
+                return this.$store.getters.pages[this.$route.path.toLowerCase()];
+            }
+        },
         created() {
             console.log(this.$route.path);
         }

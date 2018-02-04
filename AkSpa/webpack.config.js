@@ -1,5 +1,6 @@
 ﻿var webpack = require('webpack');
 var path = require('path');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // Naming and path settings
 var appName = 'app';
@@ -8,6 +9,7 @@ var exportPath = path.resolve(__dirname, './wwwroot/dist');
 
 // Enviroment flag
 var plugins = [];
+plugins.push(new ExtractTextPlugin("style.css"));
 var env = process.env.NODE_ENV;
 
 // Differ settings based on production flag
@@ -47,7 +49,14 @@ module.exports = {
             },
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
+                options: {
+                    extractCSS: true
+                }
+            },
+            {
+                test: /\.s[a|c]ss$/,
+                loader: 'style!css!sass'
             }
         ]
     },

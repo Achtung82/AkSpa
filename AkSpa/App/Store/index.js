@@ -8,7 +8,8 @@ const store = new vuex.Store({
     strict: true,
     state: {
         admin: null,
-        page: null
+        page: null,
+        pages: null
     },
     mutations: {
         SET_ADMIN: (state, content) => {
@@ -16,29 +17,25 @@ const store = new vuex.Store({
         },
         SET_PAGE: (state, content) => {
             state.page = content;
+        },
+        SET_PAGES: (state, content) => {
+            state.pages = content;
         }
     },
     actions: {
-        GET_PAGE_CONTENT(context) {
-            fetch("/Page/GetPageContent")
-                .then(function (response) {
-                    return response.json();
-                }).then(function (json) {
-                    context.commit("SET_PAGE", json);
-                });
-        },
-        GET_ADMIN_CONTENT(context) {
-            fetch("/Page/GetAdminContent")
-                .then(function (response) {
-                    return response.json();
-                }).then(function (json) {
-                    context.commit("SET_ADMIN", json);
-                });
+        GET_PAGES(context) {
+            //fetch("/Page/GetAllPages")
+            //    .then(function (response) {
+            //        return response.json();
+            //    }).then(function (json) {
+            //        context.commit("SET_PAGES", json);
+            //    });
         }
     },
     getters: {
         admin: state => state.admin,
-        page: state => state.page
+        page: state => state.page,
+        pages: state => state.pages
     }
 });
 

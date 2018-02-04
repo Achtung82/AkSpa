@@ -9,7 +9,7 @@
         <router-link class="menu-link" to="/">Page</router-link>
         <router-link class="menu-link" to="/omoss">Om oss</router-link>
         <router-link class="menu-link" to="/safaf">Om er</router-link>
-        <router-link class="menu-link" to="/admin">AdminPage</router-link>
+        <router-link class="menu-link" to="/admin">Admin Page</router-link>
     </nav>
 </header>
 </template>

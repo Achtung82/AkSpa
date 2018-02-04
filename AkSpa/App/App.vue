@@ -16,6 +16,9 @@
             Header,
             Page,
             AdminPage
+        },
+        created() {
+            this.$store.dispatch("GET_PAGES");
         }
     }
 </script>

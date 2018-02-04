@@ -1,11 +1,12 @@
-﻿var webpack = require('webpack');
-var path = require('path');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+﻿const webpack = require('webpack');
+const LoaderOptionsPlugin = require("webpack/lib/LoaderOptionsPlugin");
+const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // Naming and path settings
 var appName = 'app';
 var entryPoint = './App/main.js';
-var exportPath = path.resolve(__dirname, './wwwroot/dist');
+var exportPath = path.resolve(__dirname, './wwwroot/dist/');
 
 var plugins = [];
 var extractSASS = new ExtractTextPlugin("style.css");
@@ -22,18 +23,32 @@ if (env === 'production') {
             }
         }
     ));
-    appName = appName + '.js';
 } else {
-    appName = appName + '.js';
+    plugins.push(new LoaderOptionsPlugin({
+        options: {
+            tslint: {
+                emitErrors: true,
+                failOnHint: false
+            },
+            eslint: {
+                emitErrors: true,
+                failOnHint: true
+            }
+        }
+    }));
 }
+
 plugins.push(extractSASS);
-// Main Settings config
+appName = appName + '.js';
+
 module.exports = {
     entry: { main: entryPoint },
     output: {
         path: exportPath,
         filename: appName,
-        publicPath: '/dist'
+        publicPath: '/dist/',
+        hotUpdateChunkFilename: 'hot/hot-update.js',
+        hotUpdateMainFilename: 'hot/hot-update.json'
     },
     module: {
         loaders: [

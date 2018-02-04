@@ -8,7 +8,7 @@ var exportPath = path.resolve(__dirname, './wwwroot/dist');
 
 // Enviroment flag
 var plugins = [];
-var env = process.env.WEBPACK_ENV;
+var env = process.env.NODE_ENV;
 
 // Differ settings based on production flag
 if (env === 'production') {
@@ -22,7 +22,7 @@ if (env === 'production') {
         }
     ));
 
-    appName = appName + '.min.js';
+    appName = appName + '.js';
 } else {
     appName = appName + '.js';
 }

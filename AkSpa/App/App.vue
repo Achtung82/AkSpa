@@ -14,6 +14,9 @@
         components: {
             Header,
             Page
+        },
+        created() {
+            this.$store.dispatch("GET_MENUS");
         }
     }
 </script>

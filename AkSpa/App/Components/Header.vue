@@ -13,21 +13,11 @@
 </header>
 </template>
 <script>
-    import 'whatwg-fetch';
     export default {
-        data: function () {
-            return {
-                menus: null
+        computed: {
+            menus() {
+                return this.$store.getters.menus;
             }
-        },
-        created() {
-            var self = this;
-            fetch('/Menu/GetAll')
-                .then(function (response) {
-                    return response.json();
-                }).then(function (json) {
-                    self.menus = json;
-                });
         }
     }
 </script>

@@ -12,6 +12,9 @@ var env = process.env.NODE_ENV;
 
 // Differ settings based on production flag
 if (env === 'production') {
+    var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+
+    plugins.push(new UglifyJsPlugin({ minimize: true }));
     plugins.push(new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"'

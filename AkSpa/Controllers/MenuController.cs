@@ -6,9 +6,9 @@ namespace AkSpa.Controllers
     public class MenuController : Controller
     {
         [HttpGet]
-        public IActionResult GetAll()
+        public JsonResult GetAll()
         {
-            return Ok(new List<string>()
+            return Json(new List<string>
             {
                 "hej",
                 "haj",

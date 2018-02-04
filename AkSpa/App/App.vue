@@ -2,18 +2,20 @@
     <div>
         <Header />
         <div class="body-content">
-            <Page />
+            <router-view></router-view>
         </div>
     </div>
 </template>
 <script>
     import Header from './Components/Header.vue'
     import Page from './Components/Page.vue'
+    import AdminPage from './Components/AdminPage.vue'
 
     export default {
         components: {
             Header,
-            Page
+            Page,
+            AdminPage
         },
         created() {
             this.$store.dispatch("GET_MENUS");

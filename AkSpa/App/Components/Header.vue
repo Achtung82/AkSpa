@@ -4,21 +4,18 @@
         Meny
     </div>
     <nav>
-        <a v-for="menu in menus"
-           class="menu-link" 
-           href="">
-            {{menu}}
-        </a>
+        <router-link class="menu-link" to="/">Page</router-link>
+        <router-link class="menu-link" to="/admin">AdminPage</router-link>
     </nav>
 </header>
 </template>
 <script>
     export default {
-        computed: {
-            menus() {
-                return this.$store.getters.menus;
-            }
-        }
+        //computed: {
+        //    menus() {
+        //        return this.$store.getters.menus;
+        //    }
+        //}
     }
 </script>
 <style lang="scss">

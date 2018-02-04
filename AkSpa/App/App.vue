@@ -21,7 +21,7 @@
 </script>
 <style lang="scss">
 
-    @import "./Styles/general.scss";
+    @import "./Styles/index.scss";
 
     *, *::before, *::after {
         box-sizing: border-box;

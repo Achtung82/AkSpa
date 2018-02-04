@@ -1,21 +1,21 @@
 ﻿<template>
-    <div class="page"  v-on:click="testMethod">
+    <div class="page">
         <h1>Välkommen!</h1>
         <h2>Subtext</h2>
         <h3>Subtext</h3>
         <h4>Subtext</h4>
+        <span v-for="word in content">{{word}}</span>
     </div>
 </template>
 <script>
     export default {
-        methods: {
-            testMethod() {
-                console.log("Hej");
-                console.log(this.message);
+        computed: {
+            content() {
+                return this.$store.getters.page;
             }
         },
-        created: function () {
-            this.message = "Hello!";
+        created() {
+            this.$store.dispatch("GET_PAGE_CONTENT");
         }
     }
 </script>

@@ -4,7 +4,7 @@ var path = require('path');
 // Naming and path settings
 var appName = 'app';
 var entryPoint = './App/main.js';
-var exportPath = path.resolve(__dirname, './wwwroot/');
+var exportPath = path.resolve(__dirname, './wwwroot/dist');
 
 // Enviroment flag
 var plugins = [];
@@ -29,10 +29,11 @@ if (env === 'production') {
 
 // Main Settings config
 module.exports = {
-    entry: entryPoint,
+    entry: { main: entryPoint },
     output: {
         path: exportPath,
-        filename: appName
+        filename: appName,
+        publicPath: '/dist'
     },
     module: {
         loaders: [

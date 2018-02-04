@@ -7,11 +7,10 @@ var appName = 'app';
 var entryPoint = './App/main.js';
 var exportPath = path.resolve(__dirname, './wwwroot/dist');
 
-// Enviroment flag
 var plugins = [];
-plugins.push(new ExtractTextPlugin("style.css"));
-var env = process.env.NODE_ENV;
+var extractSASS = new ExtractTextPlugin("style.css");
 
+var env = process.env.NODE_ENV;
 // Differ settings based on production flag
 if (env === 'production') {
     var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
@@ -23,12 +22,11 @@ if (env === 'production') {
             }
         }
     ));
-
     appName = appName + '.js';
 } else {
     appName = appName + '.js';
 }
-
+plugins.push(extractSASS);
 // Main Settings config
 module.exports = {
     entry: { main: entryPoint },
@@ -55,8 +53,15 @@ module.exports = {
                 }
             },
             {
-                test: /\.s[a|c]ss$/,
-                loader: 'style!css!sass'
+                test: /\.(scss|sass)$/,
+                loader: 'style!css!postcss-loader!sass'
+            },
+            {
+                test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]?[hash]'
+                }
             }
         ]
     },

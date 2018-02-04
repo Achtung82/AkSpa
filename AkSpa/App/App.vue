@@ -1,7 +1,9 @@
 ﻿<template>
-    <div id="app">
+    <div>
         <Header />
-        <h1>Välkommen!</h1>
+        <div class="body-content">
+            <h1>Välkommen!</h1>
+        </div>
     </div>
 </template>
 <script>
@@ -15,17 +17,16 @@
 </script>
 <style lang="scss">
 
-    @import './general.scss';
+    @import "./Styles/general.scss";
 
     *, *::before, *::after {
         box-sizing: border-box;
     }
 
-    #app {
+    .body-content {
         max-width: 400px;
         margin: 0 auto;
         line-height: 1.4;
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
         color: $vue-blue;
     }
 

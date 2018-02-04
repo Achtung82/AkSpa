@@ -20,7 +20,7 @@
     }
 </script>
 <style lang="scss">
-    @import '../general.scss';
+    @import "../Styles/variables.scss";
 
     header {
         background-color: $vue-green;

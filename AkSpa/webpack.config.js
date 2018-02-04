@@ -25,10 +25,6 @@ if (process.env.NODE_ENV === 'production') {
 } else {
     plugins.push(new LoaderOptionsPlugin({
         options: {
-            tslint: {
-                emitErrors: true,
-                failOnHint: false
-            },
             eslint: {
                 emitErrors: true,
                 failOnHint: true

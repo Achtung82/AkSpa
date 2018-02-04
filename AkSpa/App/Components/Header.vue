@@ -23,6 +23,6 @@
     @import "../Styles/variables.scss";
 
     header {
-        background-color: $vue-green;
+        background-color: $akred;
     }
 </style>

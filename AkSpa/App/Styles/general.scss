@@ -1,2 +1,16 @@
 ﻿@import "variables";
 @import "~normalize-scss/sass/normalize/_import-now.scss";
+
+body {
+    background-color: $akblack;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 500;
+    color: $akred;
+}
+
+h2, h3, h4{
+    text-transform: uppercase;
+}

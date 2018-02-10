@@ -28,7 +28,7 @@
         },
         methods: {
             getRoutes() {
-                let routes = [];
+                const routes = [];
                 this.$store.getters.menus.forEach(function (menu) {
                     routes.push({ path: menu.url, component: Page });
                 });

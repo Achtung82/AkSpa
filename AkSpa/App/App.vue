@@ -21,16 +21,16 @@
         },
         created() {
             var self = this;
-            this.$store.dispatch("GET_PAGES");
-            this.$store.dispatch("GET_MENUS").then(function () {
+            this.$store.dispatch("GET_PAGES").then(function () {
                 self.$router.addRoutes(self.getRoutes());
             });
+            this.$store.dispatch("GET_MENUS");
         },
         methods: {
             getRoutes() {
                 const routes = [];
-                this.$store.getters.menus.forEach(function (menu) {
-                    routes.push({ path: menu.url, component: Page });
+                Object.keys(this.$store.getters.pages).forEach(function (slug) {
+                    routes.push({ path: slug, component: Page });
                 });
                 return routes;
             }

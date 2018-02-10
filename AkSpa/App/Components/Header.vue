@@ -1,12 +1,12 @@
 ﻿<template>
 <header>
     <div class="container">
-        <a class="logo" href="/">
+        <router-link class="logo" to="/">
             <img src="/images/logo.png" alt="Alte Kamereren &amp; Kamrérbaletten">
-        </a>
+        </router-link>
     </div>
     <nav>
-        <router-link 
+        <router-link v-if="menus"
                      v-for="menu in menus" 
                      class="menu-link" 
                      v-bind:key="menu.url"

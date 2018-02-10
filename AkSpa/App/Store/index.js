@@ -20,12 +20,17 @@ const store = new vuex.Store({
     },
     actions: {
         GET_PAGES(context) {
-            fetch("/Page/GetAllPages")
-                .then(function (response) {
-                    return response.json();
-                }).then(function (json) {
-                    context.commit("SET_PAGES", json);
-                });
+            return new Promise((resolve, reject) => {
+                fetch("/Page/GetAllPages")
+                    .then(function(response) {
+                        return response.json();
+                    }).then(function(json) {
+                        context.commit("SET_PAGES", json);
+                        resolve("Pages stored successfully");
+                    }).catch((err) => {
+                        reject("Storage of Pages failed");
+                    });
+            });
         },
         GET_MENUS(context) {
             return new Promise((resolve, reject) => {

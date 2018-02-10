@@ -15,16 +15,3 @@ h2, h3, h4{
 a{
     text-decoration: none;
 }
-
-.fade-enter-active, .fade-leave-active {
-    transition-property: opacity;
-    transition-duration: .15s;
-}
-
-.fade-enter-active {
-    transition-delay: .2s;
-}
-
-.fade-enter, .fade-leave-active {
-    opacity: 0
-}

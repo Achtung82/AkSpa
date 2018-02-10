@@ -3,7 +3,6 @@ const LoaderOptionsPlugin = require("webpack/lib/LoaderOptionsPlugin");
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-// Naming and path settings
 var appName = 'app';
 var entryPoint = './App/main.js';
 var exportPath = path.resolve(__dirname, './wwwroot/dist/');
@@ -11,7 +10,6 @@ var exportPath = path.resolve(__dirname, './wwwroot/dist/');
 var plugins = [];
 var extractSASS = new ExtractTextPlugin("style.css");
 
-// Differ settings based on production flag
 if (process.env.NODE_ENV === 'production') {
     var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 

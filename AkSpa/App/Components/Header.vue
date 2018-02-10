@@ -6,21 +6,22 @@
         </a>
     </div>
     <nav>
-        <router-link class="menu-link" to="/">Hem</router-link>
-        <router-link class="menu-link" to="/hire">Anlita oss</router-link>
-        <router-link class="menu-link" to="/join">Gå med</router-link>
-        <router-link class="menu-link" to="/om-oss">Om oss</router-link>
-        <router-link class="menu-link" to="/Upcoming">Spelningar</router-link>
+        <router-link 
+                     v-for="menu in menus" 
+                     class="menu-link" 
+                     v-bind:key="menu.url"
+                     :to="menu.url">
+        {{menu.text}}</router-link>
     </nav>
 </header>
 </template>
 <script>
     export default {
-        //computed: {
-        //    menus() {
-        //        return this.$store.getters.menus;
-        //    }
-        //}
+        computed: {
+            menus: function () {
+                return this.$store.getters.menus;
+            }
+        }
     }
 </script>
 <style lang="scss">

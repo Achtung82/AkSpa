@@ -2,7 +2,9 @@
     <div>
         <Header />
         <div class="body-content">
-            <router-view></router-view>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
         </div>
     </div>
 </template>
@@ -18,7 +20,20 @@
             AdminPage
         },
         created() {
+            var self = this;
             this.$store.dispatch("GET_PAGES");
+            this.$store.dispatch("GET_MENUS").then(function () {
+                self.$router.addRoutes(self.getRoutes());
+            });
+        },
+        methods: {
+            getRoutes() {
+                let routes = [];
+                this.$store.getters.menus.forEach(function (menu) {
+                    routes.push({ path: menu.url, component: Page });
+                });
+                return routes;
+            }
         }
     }
 </script>

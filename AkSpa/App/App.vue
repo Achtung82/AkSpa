@@ -1,7 +1,7 @@
 ﻿<template>
     <div>
         <Header />
-        <div class="body-content">
+        <div class="container body-content">
             <keep-alive>
                 <router-view></router-view>
             </keep-alive>
@@ -46,8 +46,6 @@
     }
 
     .body-content {
-        max-width: 400px;
-        margin: 0 auto;
         line-height: 1.4;
         color: $akwhite;
     }

@@ -31,7 +31,8 @@
         background-color: $akred;
         display: block;
         position: relative;
-        border-bottom: 2px solid #1a1a1a;
+        border-bottom: 2px solid $akgrey;
+        font-weight: 400;
         padding: 15px 0 0;
     }
     header nav {

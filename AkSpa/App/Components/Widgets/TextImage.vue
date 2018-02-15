@@ -11,9 +11,6 @@
     }
 </script>
 <style lang="scss">
-    .text-image{
-        display: flex;
-    } 
     .text-image .text h1{
         text-align: left;
     }
@@ -22,5 +19,18 @@
     }
     .text-image .image img {
         width: 100%;
+    }
+    @media (max-width: 767px) {
+        .text-image .image {
+            display: none;
+        }
+    }
+    @media (min-width: 768px) {
+        .text-image .text {
+            margin-right: 30px;
+        }
+        .text-image {
+            display: flex;
+        } 
     }
 </style>

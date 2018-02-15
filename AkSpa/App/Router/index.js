@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
     mode: "history",
-    routes: [{ path: "/", component: Page }]
+    routes: [{ path: "/", component: Page, meta: { key: 0 } }]
 });
 
 export default router;

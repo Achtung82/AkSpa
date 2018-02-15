@@ -2,9 +2,9 @@
     <div>
         <Header />
         <div class="container body-content">
-            <keep-alive>
-                <router-view></router-view>
-            </keep-alive>
+            <transition name="blink" mode="out-in" appear >
+                <router-view :key="key"></router-view>
+            </transition>
         </div>
     </div>
 </template>
@@ -30,9 +30,16 @@
             getRoutes() {
                 const routes = [];
                 Object.keys(this.$store.getters.pages).forEach(function (slug) {
-                    routes.push({ path: slug, component: Page });
+                    routes.push({ path: slug, component: Page, meta: { key: slug } });
                 });
                 return routes;
+            }
+        },
+        computed: {
+            key() {
+                return this.$route.meta.key !== undefined
+                    ? this.$route.meta.key
+                    : this.$route
             }
         }
     }

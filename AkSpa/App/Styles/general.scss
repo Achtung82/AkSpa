@@ -28,3 +28,11 @@ p.infobox {
     padding: 10px;
     margin: 40px 0;
 }
+
+.blink-enter-active {
+    transition: opacity .3s ease;
+}
+
+.blink-enter, .blink-leave-active {
+    opacity: 0
+}

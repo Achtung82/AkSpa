@@ -1,17 +1,17 @@
 ﻿<template>
     <div class="page" v-if="pageData">
-        <template v-for="wiget in wigets">
-            <wiget :wigetdata="wiget">
-            </wiget>
+        <template v-for="widget in widgets">
+            <widget :widgetdata="widget">
+            </widget>
         </template>
     </div>
 </template>
 <script>
-    import Wiget from './Wiget.vue';
+    import Widget from './Widget.vue';
 
     export default {
         components: {
-            Wiget
+            Widget
         },
         computed: {
             pageData: function () {
@@ -20,7 +20,7 @@
                 }
                 return this.$store.getters.pages[this.$route.path.toLowerCase()];
             },
-            wigets: function () {
+            widgets: function () {
                 if (!this.$store.getters.pages) {
                     return false;
                 }

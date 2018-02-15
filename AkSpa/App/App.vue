@@ -2,8 +2,10 @@
     <div>
         <Header />
         <div class="container body-content">
-            <transition name="blink" mode="out-in" appear >
-                <router-view :key="key"></router-view>
+            <transition name="blink" mode="out-in" appear>
+                <keep-alive>
+                    <router-view :key="key"></router-view>
+                </keep-alive>
             </transition>
         </div>
     </div>

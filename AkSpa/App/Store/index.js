@@ -8,7 +8,8 @@ const store = new vuex.Store({
     strict: process.env.NODE_ENV !== "production",
     state: {
         pages: null,
-        menus: null
+        menus: null,
+        events: null
     },
     mutations: {
         SET_PAGES: (state, content) => {
@@ -16,34 +17,27 @@ const store = new vuex.Store({
         },
         SET_MENUS: (state, content) => {
             state.menus = content;
+        },
+        SET_EVENTS: (state, content) => {
+            state.events = content;
         }
     },
     actions: {
         GET_PAGES(context) {
-            return new Promise((resolve, reject) => {
-                fetch("/Page/GetAllPages")
-                    .then(function(response) {
-                        return response.json();
-                    }).then(function(json) {
-                        context.commit("SET_PAGES", json);
-                        resolve("Pages stored successfully");
-                    }).catch((err) => {
-                        reject("Storage of Pages failed");
-                    });
-            });
+            return fetch("/api/Page")
+                .then(function(response) {
+                    return response.json();
+                }).then(function(json) {
+                    context.commit("SET_PAGES", json);
+                });
         },
         GET_MENUS(context) {
-            return new Promise((resolve, reject) => {
-                fetch("/Menu/GetAllMenus")
-                    .then(function(response) {
-                        return response.json();
-                    }).then(function(json) {
-                        context.commit("SET_MENUS", json);
-                        resolve("Menus stored successfully");
-                    }).catch((err) => {
-                        reject("Storage of Menus failed");
-                    });
-            });
+            return fetch("/api/Menu")
+                .then(function(response) {
+                    return response.json();
+                }).then(function(json) {
+                    context.commit("SET_MENUS", json);
+                });
         }
     },
     getters: {

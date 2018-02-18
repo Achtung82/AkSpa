@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AkSpa.Controllers
 {
+    [Route("api/[controller]")]
     public class MenuController : Controller
     {
         private readonly AkContext _db;

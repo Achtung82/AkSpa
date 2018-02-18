@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AkSpa.Controllers
 {
+    [Route("api/[controller]")]
     public class PageController : Controller
     {
         private readonly AkContext _db;
@@ -14,27 +15,6 @@ namespace AkSpa.Controllers
             _db = db;
         }
 
-        [HttpGet]
-        public JsonResult GetPageContent()
-        {
-            return Json(new List<string>
-            {
-                "hej",
-                "haj",
-                "Hoj"
-            });
-        }
-
-        [HttpGet]
-        public JsonResult GetAdminContent()
-        {
-            return Json(new List<string>
-            {
-                "hemligt",
-                "hemligt",
-                "hemligt"
-            });
-        }
         [HttpGet]
         public JsonResult GetAllPages()
         {

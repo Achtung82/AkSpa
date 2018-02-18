@@ -38,11 +38,20 @@ const store = new vuex.Store({
                 }).then(function(json) {
                     context.commit("SET_MENUS", json);
                 });
+        },
+        GET_EVENTS(context) {
+            return fetch("/api/Event")
+                .then(function(response) {
+                    return response.json();
+                }).then(function(json) {
+                    context.commit("SET_EVENTS", json);
+                });
         }
     },
     getters: {
         pages: state => state.pages,
-        menus: state => state.menus
+        menus: state => state.menus,
+        events: state => state.events
     }
 });
 

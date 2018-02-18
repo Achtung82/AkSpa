@@ -7,11 +7,17 @@
     </div>
     <nav>
         <router-link v-if="menus"
-                     v-for="menu in menus" 
-                     class="menu-link" 
+                     v-for="menu in menus"
+                     class="menu-link"
                      v-bind:key="menu.url"
                      :to="menu.url">
-        {{menu.text}}</router-link>
+            {{menu.text}}
+        </router-link>
+        <router-link v-if="menus"
+                     class="menu-link"
+                     v-bind:key="'/upcomming'"
+                     to="/upcomming">På gång
+        </router-link>
     </nav>
 </header>
 </template>

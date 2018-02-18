@@ -11,7 +11,7 @@
     }
 </script>
 <style lang="scss">
-    @import "../Styles/variables.scss";
+    @import "../../Styles/variables.scss";
     .admin-page {
         color: yellow;
     }

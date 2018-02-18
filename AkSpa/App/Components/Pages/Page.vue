@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-    import Widget from './Widget.vue';
+    import Widget from '../Widget.vue';
 
     export default {
         components: {
@@ -37,7 +37,7 @@
     }
 </script>
 <style lang="scss">
-    @import "../Styles/variables.scss";
+    @import "../../Styles/variables.scss";
     .page {
         color: white;
         padding: 40px 30px;

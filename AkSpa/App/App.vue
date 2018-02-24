@@ -41,7 +41,7 @@
             key() {
                 return this.$route.meta.key !== undefined
                     ? this.$route.meta.key
-                    : this.$route
+                    : location.pathname;
             }
         }
     }

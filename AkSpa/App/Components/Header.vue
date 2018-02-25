@@ -4,7 +4,8 @@
             <router-link class="logo" to="/">
                 <img src="/images/logo.png" alt="Alte Kamereren &amp; Kamrérbaletten">
             </router-link>
-            <a class="account hidden-xs" @click="showModal = true">Logga in</a>
+            <a class="account hidden-xs" v-if="!loggedin" @click="showModal = true">Logga in</a>
+            <a href="/account/logout" class="account hidden-xs" v-if="loggedin">Logga ut</a>
         </div>
         <nav>
             <template v-if="menus" v-for="menu in menus">
@@ -39,7 +40,10 @@
         computed: {
             menus: function () {
                 return this.$store.getters.menus;
-            }
+            },
+            loggedin: function () {
+                return this.$store.getters.loggedin;
+            },
         },
         data: function () {
             return {

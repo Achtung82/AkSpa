@@ -8,9 +8,8 @@
                     </div>
                     <form ref="loginform" v-on:submit.prevent="onSubmit">
                         <div class="modal-body">
+                            <p class="error" v-if="errorMessage">{{errorMessage}}</p>
                             <input type="text" name="Username" placeholder="Användarnamn" />
-                        </div>
-                        <div class="modal-body">
                             <input type="password" name="Password" placeholder="Lösenord" />
                         </div>
                         <div class="modal-footer">
@@ -32,6 +31,7 @@
 <script>
     import "whatwg-fetch";
     import getFormData from "../Utils/getFormData";
+    import Page from './Pages/Page.vue'
 
     export default {
         props: ['show'],
@@ -39,9 +39,10 @@
             onSubmit: function () {
                 const form = this.$refs.loginform;
                 const data = getFormData(form);
+                const self = this;
 
                 return fetch("/account/login", {
-                    body: JSON.stringify({Username: "ludvig", Password: "givdul1982"}),
+                    body: data,
                     method: "post",
                     credentials: "same-origin",
                     headers: new Headers({
@@ -51,13 +52,31 @@
                 .then(function (response) {
                     return response.json();
                 }).then(function (json) {
-                    console.log(json);
                     if (json.success) {
+                        self.errorMessage = "";
                         form.reset();
+                        self.$emit("close");
+                        self.$store.dispatch("GET_ACCOUNT_INFO");
+                        self.$store.dispatch("GET_PAGES").then(function () {
+                            self.$router.addRoutes(self.getRoutes());
+                        });
+                        self.$store.dispatch("GET_MENUS");
                     }
                 });
+            },
+            getRoutes() {
+                const routes = [];
+                Object.keys(this.$store.getters.pages).forEach(function (slug) {
+                    routes.push({ path: slug, component: Page, meta: { key: slug } });
+                });
+                return routes;
             }
         },
+        data: function () {
+            return {
+                errorMessage: ""
+            }
+        }
     }
 </script>
 <style lang="scss">

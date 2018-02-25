@@ -9,7 +9,9 @@ const store = new vuex.Store({
     state: {
         pages: null,
         menus: null,
-        events: null
+        events: null,
+        loggedin: false,
+        username: null
     },
     mutations: {
         SET_PAGES: (state, content) => {
@@ -20,6 +22,12 @@ const store = new vuex.Store({
         },
         SET_EVENTS: (state, content) => {
             state.events = content;
+        },
+        SET_LOGGEDIN_STATE: (state, content) => {
+            state.loggedin = content;
+        },
+        SET_USERNAME: (state, content) => {
+            state.loggedin = content;
         }
     },
     actions: {
@@ -44,18 +52,37 @@ const store = new vuex.Store({
                 });
         },
         GET_EVENTS(context) {
-            return fetch("/api/Event")
+            return fetch("/api/Event",
+                    { credentials: "same-origin" }
+                )
                 .then(function(response) {
                     return response.json();
                 }).then(function(json) {
                     context.commit("SET_EVENTS", json);
+                });
+        },
+        GET_ACCOUNT_INFO(context) {
+            return fetch("/account/AccountInfo",
+                    { credentials: "same-origin" }
+                )
+                .then(function (response) {
+                    return response.json();
+                }).then(function (json) {
+                    if (json.loggedin) {
+                        context.commit("SET_USERNAME", name);
+                        context.commit("SET_LOGGEDIN_STATE", true);
+                    } else {
+                        context.commit("SET_LOGGEDIN_STATE", false);
+                    }
                 });
         }
     },
     getters: {
         pages: state => state.pages,
         menus: state => state.menus,
-        events: state => state.events
+        events: state => state.events,
+        loggedin: state => state.loggedin,
+        username: state => state.username
     }
 });
 

@@ -23,6 +23,7 @@
         },
         created() {
             var self = this;
+            this.$store.dispatch("GET_ACCOUNT_INFO");
             this.$store.dispatch("GET_PAGES").then(function () {
                 self.$router.addRoutes(self.getRoutes());
             });

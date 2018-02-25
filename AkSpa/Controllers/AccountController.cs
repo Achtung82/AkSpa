@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AkSpa.Models;
 using AKSpa.DataModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace AkSpa.Controllers
 {
@@ -20,7 +16,7 @@ namespace AkSpa.Controllers
         }
         [HttpPost]
         [Route("Login")]
-        public async Task<ActionResult> Login([FromBody] LoginModel model)
+        public async Task<JsonResult> Login([FromBody] LoginModel model)
         {
             if (ModelState.IsValid)
             {
@@ -42,6 +38,13 @@ namespace AkSpa.Controllers
         {
             await _signInManager.SignOutAsync();
             return Redirect("/");
+        }
+
+        [Route("AccountInfo")]
+        public JsonResult AccountInfo()
+        {
+            var loggedIn = User.Identity.IsAuthenticated;
+            return !loggedIn ? Json(new { loggedin = false }) : Json(new { loggedin = true, name = User.Identity.Name });
         }
     }
 }

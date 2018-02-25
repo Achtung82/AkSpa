@@ -18,7 +18,10 @@ namespace AkSpa.Controllers
         [HttpGet]
         public JsonResult GetAllPages()
         {
-            var pages = _db.Pages.Where(x => !x.LoggedIn).ToDictionary(x=>x.Slug.ToLower());
+            var loggedIn = User.Identity.IsAuthenticated;
+            var pages = _db.Pages
+                .Where(x => loggedIn || !x.LoggedIn)
+                .ToDictionary(x=>x.Slug.ToLower());
 
             return Json(pages);
         }

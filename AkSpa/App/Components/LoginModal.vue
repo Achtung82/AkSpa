@@ -8,7 +8,7 @@
                     </div>
                     <form ref="loginform" v-on:submit.prevent="onSubmit">
                         <div class="modal-body">
-                            <input type="text" name="UserName" placeholder="Användarnamn" />
+                            <input type="text" name="Username" placeholder="Användarnamn" />
                         </div>
                         <div class="modal-body">
                             <input type="password" name="Password" placeholder="Lösenord" />
@@ -31,28 +31,31 @@
 </template>
 <script>
     import "whatwg-fetch";
-    import serializeForm from "../Utils/serializeForm";
+    import getFormData from "../Utils/getFormData";
 
     export default {
         props: ['show'],
         methods: {
             onSubmit: function () {
                 const form = this.$refs.loginform;
-                const data = serializeForm(form);
-                console.log(data);
-                //return fetch("/account/login", {
-                //    body: JSON.stringify(data)
-                //    method: "post",
-                //    credentials: "same-origin",
-                //    headers: new Headers({
-                //        "Content-Type": "application/json; charset=utf-8"
-                //    })
-                //})
-                //.then(function (response) {
-                //    return response.json();
-                //}).then(function (json) {
-                //    context.commit("SET_PAGES", json);
-                //});
+                const data = getFormData(form);
+
+                return fetch("/account/login", {
+                    body: JSON.stringify({Username: "ludvig", Password: "givdul1982"}),
+                    method: "post",
+                    credentials: "same-origin",
+                    headers: new Headers({
+                        "Content-Type": "application/json; charset=utf-8"
+                    })
+                })
+                .then(function (response) {
+                    return response.json();
+                }).then(function (json) {
+                    console.log(json);
+                    if (json.success) {
+                        form.reset();
+                    }
+                });
             }
         },
     }

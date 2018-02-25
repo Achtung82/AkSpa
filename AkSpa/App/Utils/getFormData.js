@@ -1,7 +1,7 @@
-﻿export default function serializeForm(form) {
+﻿export default function getFormData(form) {
     const elems = form.elements;
-    let serialized = [], i, len = elems.length, str = '';
-    for (i = 0; i < len; i += 1) {
+    const payload = {};
+    for (let i = 0; i < elems.length; i += 1) {
         const element = elems[i];
         const type = element.type;
         const name = element.name;
@@ -13,12 +13,11 @@
         case 'textarea':
         case 'password':
         case 'select-one':
-            str = name + '=' + value;
-            serialized.push(str);
+            payload[name] = value;
             break;
         default:
             break;
         }
     }
-    return serialized.join('&');
+    return JSON.stringify(payload);
 }

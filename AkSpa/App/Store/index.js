@@ -24,7 +24,9 @@ const store = new vuex.Store({
     },
     actions: {
         GET_PAGES(context) {
-            return fetch("/api/Page")
+            return fetch("/api/Page",
+                    { credentials: "same-origin" }
+                )
                 .then(function(response) {
                     return response.json();
                 }).then(function(json) {
@@ -32,7 +34,9 @@ const store = new vuex.Store({
                 });
         },
         GET_MENUS(context) {
-            return fetch("/api/Menu")
+            return fetch("/api/Menu",
+                    { credentials: "same-origin" }
+                )
                 .then(function(response) {
                     return response.json();
                 }).then(function(json) {

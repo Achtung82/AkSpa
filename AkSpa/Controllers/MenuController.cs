@@ -18,18 +18,47 @@ namespace AkSpa.Controllers
         [HttpGet]
         public JsonResult GetAllMenus()
         {
-            var menuEntities = _db.Menus.Include(x=>x.Link).Where(x => !x.LoggedIn && !x.Balett).OrderBy(x => x.PosIndex).ToList();
+            var loggedIn = User.Identity.IsAuthenticated;
+            var menuEntities = _db.Menus
+                .Include(b => b.Link)
+                .Include(x => x.Children)
+                .ThenInclude(x => x.Link)
+                .Where(x => loggedIn || !x.LoggedIn)
+                .Where(x => !x.Balett)
+                .Where(x => x.Link == null || !loggedIn || !x.Link.LoggedOut)
+                .OrderBy(x => x.PosIndex).ToList();
+
+            return Json(MapMenus(menuEntities));
+        }
+
+        private IEnumerable<MenuViewModel> MapMenus(IEnumerable<Menu> menuEntities)
+        {
             var menus = new List<MenuViewModel>();
             foreach (var menuEntity in menuEntities)
             {
-                menus.Add(new MenuViewModel()
+                var topMenu = new MenuViewModel()
                 {
                     Text = menuEntity.Name,
-                    Url = menuEntity.Link.Slug
-                });
-            }
+                    Url = menuEntity.Link?.Slug
+                };
+                if (menuEntity.Children != null)
+                {
+                    var viewModelChildren = new List<MenuViewModel>();
+                    foreach (var child in menuEntity.Children)
+                    {
+                        viewModelChildren.Add(new MenuViewModel()
+                        {
+                            Text = child.Name,
+                            Url = child.Link?.Slug
+                        });
+                    }
 
-            return Json(menus);
+                    topMenu.Children = viewModelChildren;
+                }
+
+                menus.Add(topMenu);
+            }
+            return menus;
         }
     }
 }

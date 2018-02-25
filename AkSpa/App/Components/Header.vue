@@ -7,13 +7,18 @@
             <a class="account hidden-xs" @click="showModal = true">Logga in</a>
         </div>
         <nav>
-            <router-link v-if="menus"
-                         v-for="menu in menus"
-                         class="menu-link"
-                         v-bind:key="menu.url"
-                         :to="menu.url">
-                {{menu.text}}
-            </router-link>
+            <template v-if="menus" v-for="menu in menus">
+                <router-link v-if="menu.url"
+                             class="menu-link"
+                             v-bind:key="menu.url"
+                             :to="menu.url">
+                    {{menu.text}}
+                </router-link>
+                <a v-if="!menu.url"
+                    class="menu-link no-link">
+                    {{menu.text}}
+                </a>
+            </template>
             <router-link v-if="menus"
                          class="menu-link"
                          v-bind:key="'/upcomming'"

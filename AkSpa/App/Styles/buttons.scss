@@ -1,0 +1,25 @@
+﻿.ak-btn {
+    background-color: #b10000;
+    border-color: #6E1601;
+    color: $akwhite;
+    background-color: $akred;
+    border-color: $akmediumred;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+    border-radius: 4px;
+    user-select: none;
+}

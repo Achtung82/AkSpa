@@ -4,32 +4,61 @@
             <div class="modal-wrapper">
                 <div class="modal-container">
                     <div class="modal-header">
-                      Header
+                        <h3>Logga in</h3>
                     </div>
-
-                    <div class="modal-body">
-                       Body
-                    </div>
-
-                    <div class="modal-footer">
-                        <slot name="footer">
-                            Footer
-                            <button class="modal-default-button" @click="$emit('close')">
-                                OK
-                            </button>
-                        </slot>
-                    </div>
+                    <form ref="loginform" v-on:submit.prevent="onSubmit">
+                        <div class="modal-body">
+                            <input type="text" name="UserName" placeholder="Användarnamn" />
+                        </div>
+                        <div class="modal-body">
+                            <input type="password" name="Password" placeholder="Lösenord" />
+                        </div>
+                        <div class="modal-footer">
+                            <slot name="footer">
+                                <a class="btn ak-btn" @click="$emit('close')">
+                                    Stäng
+                                </a>
+                                <button class="btn ak-btn" type="submit">
+                                    Logga in
+                                </button>
+                            </slot>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </transition>
 </template>
 <script>
+    import "whatwg-fetch";
+    import serializeForm from "../Utils/serializeForm";
+
     export default {
-        props: ['show']
+        props: ['show'],
+        methods: {
+            onSubmit: function () {
+                const form = this.$refs.loginform;
+                const data = serializeForm(form);
+                console.log(data);
+                //return fetch("/account/login", {
+                //    body: JSON.stringify(data)
+                //    method: "post",
+                //    credentials: "same-origin",
+                //    headers: new Headers({
+                //        "Content-Type": "application/json; charset=utf-8"
+                //    })
+                //})
+                //.then(function (response) {
+                //    return response.json();
+                //}).then(function (json) {
+                //    context.commit("SET_PAGES", json);
+                //});
+            }
+        },
     }
 </script>
 <style lang="scss">
+    @import "../Styles/variables.scss";
     .modal-mask {
         position: fixed;
         z-index: 9998;
@@ -47,11 +76,25 @@
         vertical-align: middle;
     }
 
+    .modal-header {
+        padding: 15px;
+        border-bottom: 1px solid $grey-separator;
+    }
+
+    .modal-body {
+        padding: 15px;
+    }
+
+    .modal-footer {
+        padding: 15px;
+        text-align: right;
+        border-top: 1px solid $grey-separator;
+    }
+
     .modal-container {
-        width: 300px;
-        margin: 0px auto;
-        padding: 20px 30px;
-        background-color: #fff;
+        width: 600px;
+        margin: 30px auto;
+        background-color: $akwhite;
         border-radius: 2px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
         transition: all .3s ease;
@@ -59,7 +102,8 @@
     }
 
     .modal-header h3 {
-        margin-top: 0;
-        color: #42b983;
+        margin: 0;
+        text-transform: none;
+        color: $akblack;
     }
 </style>

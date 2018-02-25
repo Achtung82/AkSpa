@@ -1,7 +1,7 @@
 ﻿<template>
     <transition name="modal">
         <div class="modal-mask" v-if="show">
-            <div class="modal-wrapper">
+            <div class="modal-wrapper" v-on:click="maskClick">
                 <div class="modal-container">
                     <div class="modal-header">
                         <h3>Logga in</h3>
@@ -9,8 +9,14 @@
                     <form ref="loginform" v-on:submit.prevent="onSubmit">
                         <div class="modal-body">
                             <p class="error" v-if="errorMessage">{{errorMessage}}</p>
-                            <input type="text" name="Username" placeholder="Användarnamn" />
-                            <input type="password" name="Password" placeholder="Lösenord" />
+                            <input type="text" 
+                                   name="Username" 
+                                   placeholder="Användarnamn" 
+                                   autocomplete="username"/>
+                            <input type="password" 
+                                   name="Password" 
+                                   placeholder="Lösenord" 
+                                   autocomplete="password"/>
                         </div>
                         <div class="modal-footer">
                             <slot name="footer">
@@ -61,6 +67,8 @@
                             self.$router.addRoutes(self.getRoutes());
                         });
                         self.$store.dispatch("GET_MENUS");
+                    } else {
+                        self.errorMessage = json.message;
                     }
                 });
             },
@@ -70,6 +78,11 @@
                     routes.push({ path: slug, component: Page, meta: { key: slug } });
                 });
                 return routes;
+            },
+            maskClick(event) {
+                if (event.target.classList.contains("modal-wrapper")) {
+                    this.$emit("close");
+                }
             }
         },
         data: function () {
@@ -127,5 +140,18 @@
         margin: 0;
         text-transform: none;
         color: $akblack;
+    }
+
+    .modal-enter {
+        opacity: 0;
+    }
+
+    .modal-leave-active {
+        opacity: 0;
+    }
+
+    .modal-enter .modal-container,
+    .modal-leave-active .modal-container {
+        transform: translateY(-30%);
     }
 </style>

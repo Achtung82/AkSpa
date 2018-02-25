@@ -8,8 +8,11 @@
         <three-puffs v-if="widgetdata.Type==='ThreePuffs'"
                      :text="widgetdata.Text"
                      :image="widgetdata.Image"></three-puffs>
+        <header-text v-if="widgetdata.Type==='HeaderText'"
+                     :text="widgetdata.Text"
+                     :image="widgetdata.Image"></header-text>
         <hire v-if="widgetdata.Type==='Hire'"
-                     :text="widgetdata.Text"></hire>
+              :text="widgetdata.Text"></hire>
     </div>
 </template>
 <script>
@@ -17,13 +20,16 @@
     import TextWidget from './Widgets/TextWidget.vue';
     import ThreePuffs from './Widgets/ThreePuffs.vue';
     import Hire from './Widgets/Hire.vue';
+    import HeaderText from './Widgets/HeaderText.vue';
+
     export default {
         props: ['widgetdata'],
         components: {
             TextImage,
             ThreePuffs,
             TextWidget,
-            Hire
+            Hire,
+            HeaderText
         }
     }
 </script>

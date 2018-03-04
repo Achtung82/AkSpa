@@ -9,14 +9,24 @@
                     <form ref="loginform" v-on:submit.prevent="onSubmit">
                         <div class="modal-body">
                             <p class="error" v-if="errorMessage">{{errorMessage}}</p>
-                            <input type="text" 
-                                   name="Username" 
-                                   placeholder="Användarnamn" 
-                                   autocomplete="username"/>
-                            <input type="password" 
-                                   name="Password" 
-                                   placeholder="Lösenord" 
-                                   autocomplete="password"/>
+                            <div class="form-group">
+                                <label for="login-username">Användarnamn</label>
+                                <input type="text"
+                                       name="Username"
+                                       class="form-control"
+                                       placeholder="Användarnamn"
+                                       id="login-username"
+                                       autocomplete="username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Lösenord</label>
+                                <input type="password"
+                                       name="Password"
+                                       placeholder="Lösenord"
+                                       class="form-control"
+                                       id="login-password"
+                                       autocomplete="password" />
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <slot name="footer">
@@ -108,7 +118,7 @@
 
     .modal-wrapper {
         display: table-cell;
-        vertical-align: middle;
+        vertical-align: baseline;
     }
 
     .modal-header {
@@ -133,7 +143,6 @@
         border-radius: 2px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
         transition: all .3s ease;
-        font-family: Helvetica, Arial, sans-serif;
     }
 
     .modal-header h3 {

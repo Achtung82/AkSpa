@@ -12,10 +12,12 @@
         display: flex;
         flex-flow: row wrap;
     }
-    .col-sm-4 {
-        flex-grow: 1;
-        display: block;
+
+    .text-widget h1, .text-widget h2 {
+        min-width: 100%;
+        text-align: left;
     }
+
     .col-xs-12 {
         min-width: 100%;
         display: block;

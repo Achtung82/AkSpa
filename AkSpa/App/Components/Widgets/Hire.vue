@@ -34,7 +34,7 @@
     }
     .video-bg .video-bg-content h1 {
         color: $akwhite;
-        font-size: 37px;
+        font-size: 2.3rem;
         text-align: center;
         z-index: 1;
         margin: 0;
@@ -55,6 +55,9 @@
         .video-bg .video {
             width: auto;
             height: 175%;
+        }
+        .video-bg .video-bg-content h1 {
+            font-size: 1.8rem;
         }
     }
 </style>

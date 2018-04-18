@@ -37,7 +37,7 @@ const store = new vuex.Store({
                 )
                 .then(function(response) {
                     return response.json();
-                }).then(function(json) {
+                }).then(function (json) {
                     context.commit("SET_PAGES", json);
                 });
         },

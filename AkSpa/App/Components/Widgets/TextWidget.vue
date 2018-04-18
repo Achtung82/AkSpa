@@ -18,6 +18,11 @@
         text-align: left;
     }
 
+    .col-sm-4 {
+        flex-grow: 1;
+        min-width: 33%;
+    }
+
     .col-xs-12 {
         min-width: 100%;
         display: block;

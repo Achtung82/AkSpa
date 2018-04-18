@@ -48,6 +48,7 @@
     import "whatwg-fetch";
     import getFormData from "../Utils/getFormData";
     import Page from './Pages/Page.vue'
+    import Upcoming from './Pages/Upcoming.vue'
 
     export default {
         props: ['show'],
@@ -75,6 +76,7 @@
                         self.$store.dispatch("GET_ACCOUNT_INFO");
                         self.$store.dispatch("GET_PAGES").then(function () {
                             self.$router.addRoutes(self.getRoutes());
+                            self.$router.push("/upcoming") 
                         });
                         self.$store.dispatch("GET_MENUS");
                     } else {

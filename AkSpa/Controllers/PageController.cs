@@ -21,6 +21,7 @@ namespace AkSpa.Controllers
             var loggedIn = User.Identity.IsAuthenticated;
             var pages = _db.Pages
                 .Where(x => loggedIn || !x.LoggedIn)
+                .Where(x => !loggedIn || !x.LoggedOut)
                 .ToDictionary(x=>x.Slug.ToLower());
 
             return Json(pages);

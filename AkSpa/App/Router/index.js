@@ -10,7 +10,7 @@ const router = new VueRouter({
     mode: "history",
     routes: [
         { path: "/", component: Page, meta: { key: '/' } },
-        { path: "/upcomming", component: Upcoming, meta: { key: '/upcomming' } }
+        { path: "/upcoming", component: Upcoming, meta: { key: '/upcoming' } }
     ]
 });
 

@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="three-puffs">
-        <router-link to="/upcomming" class="puff">
+        <router-link to="/upcoming" class="puff">
             <div class="image-container">
                 <div class="image" v-bind:style="{ backgroundImage: imageStyle }">
                 </div>

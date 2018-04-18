@@ -1,7 +1,7 @@
 ﻿<template>
     <header>
         <div class="container">
-            <router-link class="logo" to="/">
+            <router-link class="logo" :to="logolink">
                 <img src="/images/logo.png" alt="Alte Kamereren &amp; Kamrérbaletten">
             </router-link>
             <a class="account hidden-xs" v-if="!loggedin" @click="showModal = true">Logga in</a>
@@ -9,33 +9,23 @@
         </div>
         <nav>
             <template v-if="menus" v-for="menu in menus">
-                <router-link v-if="menu.url"
-                             class="menu-link"
-                             v-bind:key="menu.url"
-                             :to="menu.url">
-                    {{menu.text}}
-                </router-link>
-                <a v-if="!menu.url"
-                    class="menu-link no-link">
-                    {{menu.text}}
-                </a>
+                <menu-item :menu="menu"></menu-item>
             </template>
-            <router-link v-if="menus"
-                         class="menu-link"
-                         v-bind:key="'/upcomming'"
-                         to="/upcomming">
-                På gång
-            </router-link>
+            <template v-if="menus" v-for="menu in extramenus">
+                <menu-item :menu="menu"></menu-item>
+            </template>
         </nav>
         <login-modal :show="showModal" @close="showModal = false"></login-modal>
     </header>
 </template>
 <script>
     import LoginModal from './LoginModal.vue';
+    import MenuItem from './MenuItem.vue';
 
     export default {
         components: {
-            LoginModal
+            LoginModal,
+            MenuItem
         },
         computed: {
             menus: function () {
@@ -44,6 +34,17 @@
             loggedin: function () {
                 return this.$store.getters.loggedin;
             },
+            logolink: function () {
+                if (!this.$store.getters.loggedin) {
+                    return "/";
+                } 
+                return "/upcoming";
+            },
+            extramenus: function () {
+                let menus = [];
+                menus.push({ url: "/upcoming", text: "På gång" });
+                return menus;
+            }
         },
         data: function () {
             return {
@@ -79,13 +80,6 @@
     }
     .logo {
         display: block;
-    }
-    nav .menu-link {
-        color: $akwhite;
-        padding: 0 20px;
-    }
-    nav .menu-link.router-link-exact-active {
-        color: $akmenulinkgrey;
     }
     .account {
         color: $akblack;

@@ -74,22 +74,12 @@
                         form.reset();
                         self.$emit("close");
                         self.$store.dispatch("GET_ACCOUNT_INFO");
-                        self.$store.dispatch("GET_PAGES").then(function () {
-                            self.$router.addRoutes(self.getRoutes());
-                            self.$router.push("/upcoming") 
-                        });
+                        self.$store.dispatch("GET_PAGES");
                         self.$store.dispatch("GET_MENUS");
                     } else {
                         self.errorMessage = json.message;
                     }
                 });
-            },
-            getRoutes() {
-                const routes = [];
-                Object.keys(this.$store.getters.pages).forEach(function (slug) {
-                    routes.push({ path: slug, component: Page, meta: { key: slug } });
-                });
-                return routes;
             },
             maskClick(event) {
                 if (event.target.classList.contains("modal-wrapper")) {

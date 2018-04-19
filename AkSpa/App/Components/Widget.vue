@@ -13,6 +13,8 @@
                      :image="widgetdata.Image"></header-text>
         <hire v-if="widgetdata.Type==='Hire'"
               :text="widgetdata.Text"></hire>
+        <join v-if="widgetdata.Type==='Join'"
+              :text="widgetdata.Text"></join>
     </div>
 </template>
 <script>
@@ -20,6 +22,7 @@
     import TextWidget from './Widgets/TextWidget.vue';
     import ThreePuffs from './Widgets/ThreePuffs.vue';
     import Hire from './Widgets/Hire.vue';
+    import Join from './Widgets/Join.vue';
     import HeaderText from './Widgets/HeaderText.vue';
 
     export default {
@@ -29,7 +32,8 @@
             ThreePuffs,
             TextWidget,
             Hire,
-            HeaderText
+            HeaderText,
+            Join
         }
     }
 </script>

@@ -49,6 +49,7 @@
     nav .menu-link {
         color: $akwhite;
         padding: 0 20px;
+        font-size: 1rem;
     }
     nav .menu-link.router-link-exact-active,
     nav .selected{

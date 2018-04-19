@@ -1,6 +1,6 @@
 ﻿import vue from "vue";
 import vuex from "vuex";
-import "whatwg-fetch";
+import { getJson } from "../Utils/apiservices";
 
 vue.use(vuex);
 
@@ -32,42 +32,22 @@ const store = new vuex.Store({
     },
     actions: {
         GET_PAGES(context) {
-            return fetch("/api/Page",
-                    { credentials: "same-origin" }
-                )
-                .then(function(response) {
-                    return response.json();
-                }).then(function (json) {
+            return getJson("/api/Page").then(function (json) {
                     context.commit("SET_PAGES", json);
                 });
         },
         GET_MENUS(context) {
-            return fetch("/api/Menu",
-                    { credentials: "same-origin" }
-                )
-                .then(function(response) {
-                    return response.json();
-                }).then(function(json) {
+            return getJson("/api/Menu").then(function(json) {
                     context.commit("SET_MENUS", json);
                 });
         },
         GET_EVENTS(context) {
-            return fetch("/api/Event",
-                    { credentials: "same-origin" }
-                )
-                .then(function(response) {
-                    return response.json();
-                }).then(function(json) {
+            return getJson("/api/Event").then(function(json) {
                     context.commit("SET_EVENTS", json);
                 });
         },
         GET_ACCOUNT_INFO(context) {
-            return fetch("/account/AccountInfo",
-                    { credentials: "same-origin" }
-                )
-                .then(function (response) {
-                    return response.json();
-                }).then(function (json) {
+            return getJson("/account/AccountInfo").then(function (json) {
                     if (json.loggedin) {
                         context.commit("SET_USERNAME", name);
                         context.commit("SET_LOGGEDIN_STATE", true);

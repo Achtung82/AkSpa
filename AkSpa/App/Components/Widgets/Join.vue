@@ -54,25 +54,14 @@
     </div>
 </template>
 <script>
-    import getFormData from "../../Utils/getFormData";
+    import postForm from "../../Utils/apiservices";
 
     export default {
         props: ['text'],
         methods: {
             onSubmit: function () {
                 const form = this.$refs.joinform;
-                const data = getFormData(form);
-                return fetch("/api/join", {
-                    body: data,
-                    method: "post",
-                    credentials: "same-origin",
-                    headers: new Headers({
-                        "Content-Type": "application/json; charset=utf-8"
-                    })
-                })
-                    .then(function (response) {
-                        return response.json();
-                    }).then(function (json) {
+                postForm(form, "/api/join").then(function (json) {
                         if (json.success) {
                             form.reset();
                         } else {

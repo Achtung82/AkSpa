@@ -8,7 +8,8 @@
                     </div>
                     <form ref="loginform" v-on:submit.prevent="onSubmit">
                         <div class="modal-body">
-                            <p class="error" v-if="errorMessage">{{errorMessage}}</p>
+                            <alert-field :text="errorMessage" :error="true" :show="errorMessage">
+                            </alert-field>
                             <div class="form-group">
                                 <label for="login-username">Användarnamn</label>
                                 <input type="text"
@@ -45,30 +46,20 @@
     </transition>
 </template>
 <script>
-    import "whatwg-fetch";
-    import getFormData from "../Utils/getFormData";
-    import Page from './Pages/Page.vue'
-    import Upcoming from './Pages/Upcoming.vue'
+    import AlertField from "./AlertField";
+    import postForm from "../Utils/apiservices";
 
     export default {
         props: ['show'],
+        components: {
+            AlertField
+        },
         methods: {
             onSubmit: function () {
-                const form = this.$refs.loginform;
-                const data = getFormData(form);
                 const self = this;
+                const form = this.$refs.loginform;
 
-                return fetch("/account/login", {
-                    body: data,
-                    method: "post",
-                    credentials: "same-origin",
-                    headers: new Headers({
-                        "Content-Type": "application/json; charset=utf-8"
-                    })
-                })
-                .then(function (response) {
-                    return response.json();
-                }).then(function (json) {
+                postForm(form, "/account/login").then(function (json) {
                     if (json.success) {
                         self.errorMessage = "";
                         form.reset();

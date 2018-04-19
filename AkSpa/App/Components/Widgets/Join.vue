@@ -11,7 +11,7 @@
         <div class="join-body">
             <div class="text" v-html="text">
             </div>
-            <form class="form">
+            <form class="form" v-on:submit.prevent="onSubmit" ref="joinform">
                 <div class="form-group">
                     <label for="FirstName">Förnamn</label>
                     <input type="text" class="form-control" placeholder="Förnamn" name="FirstName">
@@ -54,8 +54,33 @@
     </div>
 </template>
 <script>
+    import getFormData from "../../Utils/getFormData";
+
     export default {
-        props: ['text']
+        props: ['text'],
+        methods: {
+            onSubmit: function () {
+                const form = this.$refs.joinform;
+                const data = getFormData(form);
+                return fetch("/api/join", {
+                    body: data,
+                    method: "post",
+                    credentials: "same-origin",
+                    headers: new Headers({
+                        "Content-Type": "application/json; charset=utf-8"
+                    })
+                })
+                    .then(function (response) {
+                        return response.json();
+                    }).then(function (json) {
+                        if (json.success) {
+                            form.reset();
+                        } else {
+                            console.log(json.message);
+                        }
+                    });
+            }
+        }
     }
 </script>
 <style lang="scss">

@@ -17,7 +17,7 @@ namespace AkSpa.Controllers
             _db = db;
         }
         [HttpPost]
-        public JsonResult Join(JoinUsModel model)
+        public JsonResult Index([FromBody]JoinUsModel model)
         {
             if (string.IsNullOrWhiteSpace(model.Email) && string.IsNullOrWhiteSpace(model.Tel))
                 return Json(new { success = false, message = "Du har ej angett ett sätt att kontakta dig med." });

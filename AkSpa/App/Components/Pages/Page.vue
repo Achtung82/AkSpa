@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-    import Widget from '../Widget.vue';
+    import Widget from '../Widgets/Widget.vue';
 
     export default {
         components: {

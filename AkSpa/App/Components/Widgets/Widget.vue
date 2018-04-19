@@ -18,12 +18,12 @@
     </div>
 </template>
 <script>
-    import TextImage from './Widgets/TextImage.vue';
-    import TextWidget from './Widgets/TextWidget.vue';
-    import ThreePuffs from './Widgets/ThreePuffs.vue';
-    import Hire from './Widgets/Hire.vue';
-    import Join from './Widgets/Join.vue';
-    import HeaderText from './Widgets/HeaderText.vue';
+    import TextImage from './TextImage.vue';
+    import TextWidget from './TextWidget.vue';
+    import ThreePuffs from './ThreePuffs.vue';
+    import Hire from './Hire.vue';
+    import Join from './Join.vue';
+    import HeaderText from './HeaderText.vue';
 
     export default {
         props: ['widgetdata'],

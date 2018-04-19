@@ -54,7 +54,7 @@
     }
 </script>
 <style lang="scss">
-    @import "../Styles/variables.scss";
+    @import "../../Styles/variables.scss";
 
     header {
         background-color: $akred;

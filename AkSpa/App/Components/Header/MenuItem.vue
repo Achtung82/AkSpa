@@ -45,7 +45,7 @@
     }
 </script>
 <style lang="scss">
-    @import "../Styles/variables.scss";
+    @import "../../Styles/variables.scss";
     nav .menu-link {
         color: $akwhite;
         padding: 0 20px;

@@ -11,7 +11,7 @@
     </div>
 </template>
 <script>
-    import Header from './Components/Header.vue'
+    import Header from './Components/Header/Header.vue'
     import Page from './Components/Pages/Page.vue'
     import AdminPage from './Components/Pages/AdminPage.vue'
 

@@ -46,8 +46,8 @@
     </transition>
 </template>
 <script>
-    import AlertField from "./AlertField";
-    import postForm from "../Utils/apiservices";
+    import AlertField from "../AlertField";
+    import postForm from "../../Utils/apiservices";
 
     export default {
         props: ['show'],
@@ -88,7 +88,7 @@
     }
 </script>
 <style lang="scss">
-    @import "../Styles/variables.scss";
+    @import "../../Styles/variables.scss";
     .modal-mask {
         position: fixed;
         z-index: 9998;

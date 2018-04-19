@@ -74,7 +74,9 @@
                         form.reset();
                         self.$emit("close");
                         self.$store.dispatch("GET_ACCOUNT_INFO");
-                        self.$store.dispatch("GET_PAGES");
+                        self.$store.dispatch("GET_PAGES").then(function () {
+                            self.$router.push("/upcoming");
+                        });
                         self.$store.dispatch("GET_MENUS");
                     } else {
                         self.errorMessage = json.message;

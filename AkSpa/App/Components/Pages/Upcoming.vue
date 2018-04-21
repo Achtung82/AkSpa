@@ -25,6 +25,9 @@
         },
         created() {
             this.$store.dispatch("GET_EVENTS");
+        },
+        activated() {
+            document.title = "På gång - Alte Kamereren";
         }
     }
 </script>

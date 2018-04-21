@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AkSpa.Models;
 using AKSpa.DataModel;
 using Microsoft.AspNetCore.Identity;
@@ -10,26 +11,27 @@ namespace AkSpa.Controllers
     public class AccountController : Controller
     {
         private readonly SignInManager<AkUser> _signInManager;
-        public AccountController(SignInManager<AkUser> signInManager)
+        private readonly UserManager<AkUser> _userManager;
+        public AccountController(SignInManager<AkUser> signInManager, UserManager<AkUser> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
         }
         [HttpPost]
         [Route("Login")]
         public async Task<JsonResult> Login([FromBody] LoginModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, true, lockoutOnFailure: false);
+            if (!ModelState.IsValid) return Json(new {success = false, message = "Inloggning misslyckades"});
 
-                if (result.Succeeded)
-                {
-                    return Json(new { success = true });
-                }
-                if (result.IsLockedOut)
-                {
-                    return Json(new { success = true, message = "Utlåst" });
-                }
+            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, true, false);
+
+            if (result.Succeeded)
+            {
+                return Json(new { success = true });
+            }
+            if (result.IsLockedOut)
+            {
+                return Json(new { success = true, message = "Utlåst" });
             }
             return Json(new { success = false, message = "Inloggning misslyckades" });
         }
@@ -41,10 +43,13 @@ namespace AkSpa.Controllers
         }
 
         [Route("AccountInfo")]
-        public JsonResult AccountInfo()
+        public async Task<JsonResult> AccountInfo()
         {
             var loggedIn = User.Identity.IsAuthenticated;
-            return !loggedIn ? Json(new { loggedin = false }) : Json(new { loggedin = true, name = User.Identity.Name });
+            if (!loggedIn) return Json(new {loggedin = false});
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var roles = await _userManager.GetRolesAsync(user);
+            return Json(new {loggedin = true, name = User.Identity.Name, roles});
         }
     }
 }

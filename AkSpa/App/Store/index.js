@@ -11,7 +11,8 @@ const store = new vuex.Store({
         menus: null,
         events: null,
         loggedin: false,
-        username: null
+        username: null,
+        roles: null
     },
     mutations: {
         SET_PAGES: (state, content) => {
@@ -28,6 +29,9 @@ const store = new vuex.Store({
         },
         SET_USERNAME: (state, content) => {
             state.loggedin = content;
+        },
+        SET_ROLES: (state, content) => {
+            state.roles = content;
         }
     },
     actions: {
@@ -48,8 +52,9 @@ const store = new vuex.Store({
         },
         GET_ACCOUNT_INFO(context) {
             return getJson("/account/AccountInfo").then(function (json) {
-                    if (json.loggedin) {
-                        context.commit("SET_USERNAME", name);
+                if (json.loggedin) {
+                    context.commit("SET_USERNAME", json.name);
+                        context.commit("SET_ROLES", json.roles);
                         context.commit("SET_LOGGEDIN_STATE", true);
                     } else {
                         context.commit("SET_LOGGEDIN_STATE", false);
@@ -62,7 +67,8 @@ const store = new vuex.Store({
         menus: state => state.menus,
         events: state => state.events,
         loggedin: state => state.loggedin,
-        username: state => state.username
+        username: state => state.username,
+        roles: state => state.roles
     }
 });
 

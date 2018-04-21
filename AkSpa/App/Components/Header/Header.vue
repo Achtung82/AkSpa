@@ -40,9 +40,20 @@
                 } 
                 return "/upcoming";
             },
+            isAdmin: function () {
+                const roles = this.$store.getters.roles;
+                return roles && (roles.indexOf("Admin") || roles.indexOf("SuperNintendo"));
+            },
+            isnintendo: function () {
+                const roles = this.$store.getters.roles;
+                return roles && roles.indexOf("SuperNintendo");
+            },
             extramenus: function () {
                 let menus = [];
                 menus.push({ url: "/upcoming", text: "På gång" });
+                if (this.isAdmin) {
+                    menus.push({ text: "Admin" });
+                }
                 return menus;
             }
         },

@@ -18,7 +18,11 @@
                 if (!this.$store.getters.pages) {
                     return false;
                 }
-                return this.$store.getters.pages[this.$route.path.toLowerCase()];
+                const data = this.$store.getters.pages[this.$route.path.toLowerCase()];
+                if (!data && this.$route.path.toLowerCase() === "/") {
+                    this.$router.push("/upcoming");
+                }
+                return data;
             },
             widgets: function () {
                 if (!this.$store.getters.pages) {

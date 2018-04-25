@@ -72,7 +72,7 @@
         }
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .join-body{
         margin-left: -15px;
         margin-right: -15px;

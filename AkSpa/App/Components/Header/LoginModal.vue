@@ -87,7 +87,7 @@
         }
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     @import "../../Styles/variables.scss";
     .modal-mask {
         position: fixed;

@@ -40,7 +40,7 @@
         }
     }
 </script>
-<style lang="scss">
+s<style lang="scss" scoped>
     @import "../../Styles/variables.scss";
     .page {
         color: white;

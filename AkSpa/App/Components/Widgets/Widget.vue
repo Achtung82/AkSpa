@@ -37,7 +37,7 @@
         }
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .widget{
         margin-bottom: 30px;
     }

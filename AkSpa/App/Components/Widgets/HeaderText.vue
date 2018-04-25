@@ -40,7 +40,6 @@
     }
 
     @media (max-width: 767px) {
-
         .header-text h1 {
             font-size: 1.8rem;
         }

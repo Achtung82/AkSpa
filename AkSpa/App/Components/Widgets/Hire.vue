@@ -17,7 +17,7 @@
         props: ['text']
     }
 </script>
-<style lang="scss">
+s<style lang="scss">
     @import "../../Styles/variables.scss";
 
     .video-bg {

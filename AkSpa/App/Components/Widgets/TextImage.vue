@@ -10,7 +10,7 @@
         props: ['text', 'image']
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .text-image .text h1{
         text-align: left;
     }

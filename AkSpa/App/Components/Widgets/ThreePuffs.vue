@@ -37,7 +37,7 @@
         }
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     @import "../../Styles/variables.scss";
    .three-puffs .puff {
         flex-grow: 1;

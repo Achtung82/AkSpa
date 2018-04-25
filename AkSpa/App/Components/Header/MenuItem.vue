@@ -44,15 +44,15 @@
         }
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     @import "../../Styles/variables.scss";
-    nav .menu-link {
+    .menu-link {
         color: $akwhite;
         padding: 0 20px;
         font-size: 1rem;
     }
-    nav .menu-link.router-link-exact-active,
-    nav .selected{
+    .menu-link.router-link-exact-active,
+    .selected{
         color: $akmenulinkgrey;
     }
     .menu-item:hover .subnav{

@@ -5,9 +5,14 @@
 </template>
 <script>
     export default {
-        props: ['albums'],
+        props: ['albumsIds'],
         created() {
-            this.$store.dispatch("GET_ALBUMS", this.albums);
+            this.$store.dispatch("GET_ALBUMS", this.albumsIds);
+        },
+        computed: {
+            albums: function () {
+                return this.$store.getters.albums;
+            }
         }
     }
 </script>

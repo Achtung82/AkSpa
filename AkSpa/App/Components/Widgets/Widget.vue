@@ -16,7 +16,7 @@
         <join v-if="widgetdata.Type==='Join'"
               :text="widgetdata.Text"></join>
         <music v-if="widgetdata.Type==='Music'"
-              :albums="widgetdata.Albums"></music>
+              :albums-ids="widgetdata.Albums"></music>
     </div>
 </template>
 <script>

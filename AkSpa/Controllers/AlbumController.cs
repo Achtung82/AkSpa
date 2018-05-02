@@ -2,12 +2,14 @@
 using System.Linq;
 using AkSpa.Models;
 using AKSpa.DataModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace AkSpa.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class AlbumController : Controller
     {
         private readonly AkContext _db;
@@ -23,8 +25,10 @@ namespace AkSpa.Controllers
             {
                 return Json(false);
             }
-
-            return Json(true);
+            var albumData = _db.Albums
+                .Where(x => albums.Contains(x.Id))
+                .Select(x=> new{x.Id, x.Name, x.Image });
+            return Json(albumData);
         }
     }
 }

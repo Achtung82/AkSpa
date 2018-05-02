@@ -12,7 +12,8 @@ const store = new vuex.Store({
         events: null,
         loggedin: false,
         username: null,
-        roles: null
+        roles: null,
+        albums: {}
     },
     mutations: {
         SET_PAGES: (state, content) => {
@@ -32,6 +33,14 @@ const store = new vuex.Store({
         },
         SET_ROLES: (state, content) => {
             state.roles = content;
+        },
+        SET_ALBUMS: (state, albums) => {
+            const newAlbums = {};
+            albums.forEach(function (album) {
+                newAlbums[album.id] = album;
+            });
+            state.albums = Object.assign({}, state.albums, newAlbums);
+
         }
     },
     actions: {
@@ -62,8 +71,15 @@ const store = new vuex.Store({
                 });
         },
         GET_ALBUMS(context, albumIds) {
-            return postObject(albumIds, "/api/Album").then(function (json) {
-                console.log(json);
+            const albumKeys = Object.keys(this.getters.albums);
+            const neededIds = albumIds.filter(x => albumKeys.indexOf(x) < 0);
+            if (neededIds.length < 1) {
+                return false;
+            }
+            return postObject(neededIds, "/api/Album").then(function (json) {
+                if (json) {
+                    context.commit("SET_ALBUMS", json);
+                }
             });
         }
     },
@@ -73,7 +89,8 @@ const store = new vuex.Store({
         events: state => state.events,
         loggedin: state => state.loggedin,
         username: state => state.username,
-        roles: state => state.roles
+        roles: state => state.roles,
+        albums: state => state.albums
     }
 });
 

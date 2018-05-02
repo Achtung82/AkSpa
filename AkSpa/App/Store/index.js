@@ -1,6 +1,6 @@
 ﻿import vue from "vue";
 import vuex from "vuex";
-import { getJson } from "../Utils/apiservices";
+import { getJson, postObject } from "../Utils/apiservices";
 
 vue.use(vuex);
 
@@ -60,6 +60,11 @@ const store = new vuex.Store({
                         context.commit("SET_LOGGEDIN_STATE", false);
                     }
                 });
+        },
+        GET_ALBUMS(context, albumIds) {
+            return postObject(albumIds, "/api/Album").then(function (json) {
+                console.log(json);
+            });
         }
     },
     getters: {

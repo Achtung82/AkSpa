@@ -15,6 +15,8 @@
               :text="widgetdata.Text"></hire>
         <join v-if="widgetdata.Type==='Join'"
               :text="widgetdata.Text"></join>
+        <music v-if="widgetdata.Type==='Music'"
+              :albums="widgetdata.Albums"></music>
     </div>
 </template>
 <script>
@@ -23,6 +25,7 @@
     import ThreePuffs from './ThreePuffs.vue';
     import Hire from './Hire.vue';
     import Join from './Join.vue';
+    import Music from './Music.vue';
     import HeaderText from './HeaderText.vue';
 
     export default {
@@ -33,7 +36,8 @@
             TextWidget,
             Hire,
             HeaderText,
-            Join
+            Join,
+            Music
         }
     }
 </script>

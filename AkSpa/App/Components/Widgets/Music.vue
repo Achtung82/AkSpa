@@ -1,5 +1,7 @@
 ﻿<template>
     <div class="music">
+        <music-player :album="selectedAlbum">
+        </music-player>
         <div class="album-list">
             <div class="album" v-for="album in albums">
                 <a href="#" class="album-link" v-on:click.prevent="albumClick(album)">
@@ -11,8 +13,13 @@
     </div>
 </template>
 <script>
+    import MusicPlayer from '../MusicPlayer/MusicPlayer.vue';
+
     export default {
         props: ['albumsIds'],
+        components: {
+            MusicPlayer
+        },
         created() {
             this.$store.dispatch("GET_ALBUMS", this.albumsIds);
         },
@@ -21,12 +28,27 @@
                 return this.$store.getters.albums;
             }
         },
+        watch: {
+            albums: function () {
+                if (this.albums) {
+                    const keys = Object.keys(this.albums);
+                    if (keys.length > 0) {
+                        this.selectedAlbum = this.albums[keys[0]];
+                    }
+                }
+            }
+        },
+        data: function () {
+            return {
+                selectedAlbum: null
+            }
+        },
         methods: {
             getImgLink: function(album) {
                 return "https://www.altekamereren.org/" + album.image;
             },
             albumClick: function (album) {
-                console.log(album.name);
+                this.selectedAlbum = album;
             }
         }
     }
@@ -36,8 +58,9 @@
     .album-list {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
     }
-    .album-img {
+    .album-list .album-img {
         height: 100px;
         max-width: 100px;
     }

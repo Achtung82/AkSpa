@@ -6,17 +6,16 @@
                 <img class="album-img" :src="albumImage"/>
             </div>
             <div class="player-module">
-
+                <div class="playlist">
+                    <a class="playlist-element" v-for="track in tracks">{{track.name}}</a>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
     export default {
-        props: ['album'],
-        created() {
-            //this.$store.dispatch("GET_ALBUMS", this.albumsIds);
-        },
+        props: ['album', 'tracks'],
         computed: {
             albumName: function () {
                 if (this.album) {
@@ -29,7 +28,7 @@
                     return "https://www.altekamereren.org" + this.album.image;
                 }
                 return "";
-        }
+            }
         }
     }
 </script>
@@ -67,5 +66,43 @@
     .player-module {
         flex-grow: 1;
         padding-left: 30px;
+    }
+
+    .playlist {
+        height: 210px;
+        overflow: auto;
+    }
+
+    .playlist-element {
+        display: block;
+        color: #a5a2a0;
+        padding: 3px 0;
+    }
+    .musicplayer ::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    .musicplayer ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+    }
+
+    .musicplayer ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px #a5a2a0;
+    }
+
+    .musicplayer ::-moz-scrollbar {
+        width: 12px;
+    }
+
+    .musicplayer ::-moz-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+    }
+
+    .musicplayer ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px #a5a2a0;
     }
 </style>

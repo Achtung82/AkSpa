@@ -30,5 +30,22 @@ namespace AkSpa.Controllers
                 .Select(x=> new{x.Id, x.Name, x.Image });
             return Json(albumData);
         }
+
+        [HttpGet("{albumId:int}")]
+        public JsonResult GetTracks(int albumId)
+        {
+            var tracks = _db.Albums.Include(x => x.Tracks).FirstOrDefault(x => x.Id == albumId)?.Tracks.OrderBy(x=>x.Number).Select(x=>new {x.Id, name = x.GetDisplayName(), file = GetFilePath(albumId, x.FileName)}).ToList();
+            if (tracks == null)
+            {
+                return Json(false);
+            }
+
+            return Json(tracks);
+        }
+
+        private static string GetFilePath(int albumId, string fileName)
+        {
+            return $"https://www.altekamereren.org/albums/{albumId}/{fileName}";
+        }
     }
 }

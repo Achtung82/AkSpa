@@ -13,7 +13,8 @@ const store = new vuex.Store({
         loggedin: false,
         username: null,
         roles: null,
-        albums: {}
+        albums: {},
+        tracks: {}
     },
     mutations: {
         SET_PAGES: (state, content) => {
@@ -41,6 +42,9 @@ const store = new vuex.Store({
             });
             state.albums = Object.assign({}, state.albums, newAlbums);
 
+        },
+        SET_TRACKS: (state, trackValues) => {
+            state.tracks = Object.assign({}, state.tracks, trackValues);
         }
     },
     actions: {
@@ -81,6 +85,18 @@ const store = new vuex.Store({
                     context.commit("SET_ALBUMS", json);
                 }
             });
+        },
+        GET_TRACKS(context, albumId) {
+            if (this.getters.tracks && this.getters.tracks[albumId]) {
+                return true;
+            }
+            return getJson("/api/Album/" + albumId).then(function (json) {
+                if (json) {
+                    const trackValues = {};
+                    trackValues[albumId] = json;
+                    context.commit("SET_TRACKS", trackValues);
+                }
+            });
         }
     },
     getters: {
@@ -90,7 +106,8 @@ const store = new vuex.Store({
         loggedin: state => state.loggedin,
         username: state => state.username,
         roles: state => state.roles,
-        albums: state => state.albums
+        albums: state => state.albums,
+        tracks: state => state.tracks
     }
 });
 

@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="music">
-        <music-player :album="selectedAlbum">
+        <music-player :album="selectedAlbum" :tracks="selectedTracks">
         </music-player>
         <div class="album-list">
             <div class="album" v-for="album in albums">
@@ -26,6 +26,13 @@
         computed: {
             albums: function () {
                 return this.$store.getters.albums;
+            },
+            selectedTracks: function () {
+                const tracks = this.$store.getters.tracks;
+                if (!tracks || !this.selectedAlbum) {
+                    return false;
+                }
+                return this.$store.getters.tracks[this.selectedAlbum.id];
             }
         },
         watch: {
@@ -34,6 +41,7 @@
                     const keys = Object.keys(this.albums);
                     if (keys.length > 0) {
                         this.selectedAlbum = this.albums[keys[0]];
+                        this.$store.dispatch("GET_TRACKS", this.selectedAlbum.id);
                     }
                 }
             }
@@ -49,6 +57,7 @@
             },
             albumClick: function (album) {
                 this.selectedAlbum = album;
+                this.$store.dispatch("GET_TRACKS", album.id);
             }
         }
     }
